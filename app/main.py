@@ -5,6 +5,7 @@ import sys
 
 import structlog
 from fastapi import FastAPI
+from dotenv import load_dotenv
 
 from app.routes import api_router
 
@@ -29,6 +30,8 @@ def configure_logging() -> None:
 
 
 def create_app() -> FastAPI:
+    # Load environment variables from a local .env file for development.
+    load_dotenv()
     configure_logging()
     app = FastAPI(title="Summarize & Sentiment API")
     app.include_router(api_router)
